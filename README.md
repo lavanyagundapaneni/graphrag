@@ -1,1 +1,1 @@
-# graphrag
+# Pure graphrag
