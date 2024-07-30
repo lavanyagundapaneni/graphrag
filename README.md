@@ -7,6 +7,10 @@ This repository contains a Python application that demonstrates how to use Neo4j
 3. Use LangChain with the Ollama LLaMA model to generate natural language answers based on graph data.
 4. using the graph data generate a formatted answer.
 
+## Configuration
+1. ### Neo4j Configuration:
+   Ensure you have a running instance of Neo4j. Update the Neo4j connection settings in the script with your database credentials:
+
 
 
 
