@@ -22,13 +22,13 @@ This repository contains a Python application that demonstrates how to use Neo4j
 ## Create Python Script:
    Create a Python script (e.g., neo4j_llama_integration.py) and add the following code
 
-### Step 1: Neo4j connection settings
+### Step 1: Neo4j connection settings:
 ```uri = "bolt://localhost:7687"
 user = "neo4j"
 password = "12345678
 ```
 
-### Step 2: Initialize Neo4j driver
+### Step 2: Initialize Neo4j driver:
 ```try:
     driver = GraphDatabase.driver(uri, auth=(user, password))
 except Exception as e:
@@ -36,7 +36,7 @@ except Exception as e:
     raise
 ```
 
-### Step 3: Function to execute a query and fetch results from Neo4j
+### Step 3: Function to execute a query and fetch results from Neo4j:
 ```def fetch_data_from_neo4j(query, parameters=None):
     try:
         with driver.session() as session:
@@ -47,11 +47,11 @@ except Exception as e:
         return []
 ```
 
-### Step 4: Initialize Ollama LLaMA 2:7b model
+### Step 4: Initialize Ollama LLaMA 2:7b model:
 `llm = Ollama(model="llama2:7b")
 `
 
-### Step 5: Function to generate graph-based answers
+### Step 5: Function to generate graph-based answers:
 ```def generate_graph_rag(question, graph_data):
     # Define the prompt template
     prompt_template = """
@@ -78,6 +78,41 @@ except Exception as e:
         print(f"Error generating answer: {e}")
         return "Error generating answer."
 ```
+
+### step 6: Write a Cypher Query to Fetch Data:
+Define a Cypher query to fetch the data you need from the Neo4j database. For example:
+```graph_query = """
+MATCH (s:Student)-[:WANTS_TO_PURUSE]->(d:Degree)-[:AT_UNIVERSITY]->(uni:University)
+WHERE uni.name = 'University of California, Berkeley'
+RETURN s.name AS student_name, d.name AS degree_name
+"""
+```
+
+### step 7: Fetch Data from Neo4j:
+`data = fetch_data_from_neo4j(graph_query)
+`
+
+### step 8: Convert Data for LLaMA Model:
+Convert the fetched data into a string format that can be passed into the LLaMA model for natural language processing:
+`graph_data = "\n".join([f"{record['student_name']} is pursuing {record['degree_name']}" for record in data])
+`
+
+### step 9: Generate answer based on the question:
+Define a question about the data retrieved from Neo4j, generate an answer using the LLaMA 2:7b model, and print both the answer and the raw data.
+```# Define a question related to the fetched data
+question = "Which students are pursuing a degree at University of California, Berkeley?"
+
+# Generate and print the answer using LLaMA 2:7b
+answer = generate_graph_rag(question, graph_data)
+print("Generated Answer:")
+print(answer)
+
+print("Fetched Data from Neo4j:")
+print(data)
+```
+
+
+
 
    
    
