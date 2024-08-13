@@ -9,10 +9,10 @@ This repository contains a Python application that demonstrates how to use Neo4j
 
 ## Configuration
 1. ### Neo4j Configuration:
-   Ensure you have a running instance of Neo4j. Update the Neo4j connection settings in the script with your database credentials:
-    /n URI:The address of your Neo4j instance (e.g., bolt://localhost:7687).
-    /n Username: Your Neo4j username (default is usually neo4j).
-    /n Password: The password for your Neo4j database.
+   Ensure you have a running instance of Neo4j. Update the Neo4j connection settings in the script with your database credentials:/n
+    URI:The address of your Neo4j instance (e.g., bolt://localhost:7687)./n
+    Username: Your Neo4j username (default is usually neo4j)./n
+    Password: The password for your Neo4j database./n
 2. ### Python Environment Setup:
    Install the necessary Python libraries using pip:
    ` pip install langchain_community neo4j `
